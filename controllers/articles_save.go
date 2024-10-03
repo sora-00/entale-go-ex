@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func SaveArticleToDB(db *sql.DB, article Article) error { 
+func SaveArticlesToDB(db *sql.DB, article Article) error { 
 	stmt, err := db.Prepare("INSERT INTO articles(title, body, publishedAt) VALUES(?, ?, ?)") 
 	if err != nil {
 		return err
@@ -48,7 +48,7 @@ func SaveArticles(db *sql.DB) http.HandlerFunc {
 	}
 
 	for _, article := range articles {
-		if err := SaveArticleToDB(db, article); err != nil {
+		if err := SaveArticlesToDB(db, article); err != nil {
 			log.Println("Error saving article:", err)
 			http.Error(w, "Error saving articles", http.StatusInternalServerError)
 			return
