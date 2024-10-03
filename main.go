@@ -2,11 +2,10 @@ package main
 
 import (
 	"database/sql"
+	"entale-go-ex/controllers"
 	"log"
 
 	"net/http"
-
-	"entale-go-ex/functions"
 
 	"github.com/go-chi/chi"
 	_ "github.com/mattn/go-sqlite3"
@@ -20,12 +19,12 @@ func main() {
 }
 	defer db.Close()
 
-	functions.CreateTables(db) 
+	controllers.CreateTables(db) 
 
 	r := chi.NewRouter() 
 
-	r.Get("/save", functions.SaveArticles(db))
-	r.Get("/articles", functions.GetArticlesHandler(db))
+	r.Get("/save", controllers.SaveArticles(db))
+	r.Get("/articles", controllers.GetArticles(db))
 
 	log.Println("Server is running on port 8080")
 	if err := http.ListenAndServe(":8080", r); err != nil {

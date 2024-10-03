@@ -1,4 +1,4 @@
-package functions
+package controllers
 
 import (
 	"database/sql"
@@ -38,7 +38,7 @@ func GetArticlesFromDB(db *sql.DB) ([]Article, error) {
 	return articles, nil
 }
 
-func GetArticlesHandler(db *sql.DB) http.HandlerFunc {
+func GetArticles(db *sql.DB) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         articles, err := GetArticlesFromDB(db)
         if err != nil {
