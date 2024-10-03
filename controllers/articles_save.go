@@ -25,7 +25,7 @@ func SaveArticleToDB(db *sql.DB, article Article) error {
 
 	for _, media := range article.Medias { 
 
-		stmt, err := db.Prepare("INSERT INTO medias(article_id, contentUrl, contentType) VALUES(?, ?, ?)") //53行目と同様
+		stmt, err := db.Prepare("INSERT INTO medias(article_id, contentUrl, contentType) VALUES(?, ?, ?)") 
 		if err != nil {
 			return err
 		}
